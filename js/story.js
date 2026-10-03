@@ -41,15 +41,9 @@ export const tracks = {
   corridor: "assets/bgm/obe.mp3",
   yard: "assets/bgm/crystal.mp3",
   star: "assets/bgm/theme.mp3",
-  void: "assets/bgm/obe.mp3",
 };
 
 export const scenes = {
-  void: {
-    name: "虚空",
-    rain: "none",
-    spots: [],
-  },
   ward: {
     name: "雪兰的病房",
     rain: "window",
@@ -114,101 +108,6 @@ export const scenes = {
 };
 
 export const scripts = {
-  boot: [
-    {
-      op: "doc",
-      title: "更新须知",
-      lines: ["欢迎来到Alpha-630！", "这是最后一个Alpha版本啦！", "也是6月最后一个版本！"],
-    },
-    { op: "go", to: "void", boot: "obe" },
-  ],
-  obe: [
-    say("？？？", "欢迎来到《粟牙》-Alpha测试版。", "immerse"),
-    say("？？？", "我是被遗弃的医院时代的最终大Boss。", "immerse"),
-    say("？？？", "为了方便404的测试我幸免留在这里和您见面。", "immerse"),
-    { op: "label", name: "c1" },
-    choice("？？？", "这是404要求我列出的选项", [
-      {
-        label: "选我",
-        then: [
-          say("？？？", "恭喜您，选中了正确的选项。", "immerse"),
-          choice("？？？", "来一道送分题吧", [
-            {
-              label: "我是正确选项",
-              then: [
-                say("？？？", "很简单的题目呢。", "immerse"),
-                say("？？？", "好啦，让我为您介绍一下基本操作方式。", "immerse"),
-                choice("？？？", "您想看哪个说明书？", [
-                  {
-                    label: "键盘鼠标",
-                    then: [
-                      say("？？？", "按下Z或Enter键可以继续对话，X键可以跳过对话动画。", "immerse"),
-                      say("？？？", "在地图上，您可以通过↑↓←→键或AWSD键移动。", "immerse"),
-                      say("？？？", "同时，您可以按下Z键与人物互动或者调查这个世界。", "immerse"),
-                    ],
-                  },
-                  {
-                    label: "触屏",
-                    then: [
-                      say("？？？", "在地图上，您可以使用屏幕左下角的轮盘移动。", "immerse"),
-                      say("？？？", "当您可以与人物互动或调查这个世界时，", "immerse"),
-                      say("？？？", "右下角将出现对应的调查按钮。", "immerse"),
-                    ],
-                  },
-                ]),
-                say("？？？", "好的，为您介绍完毕，我们开始吧！", "immerse"),
-                say("雪兰", "我是被叫来测试对话框的呢~"),
-                say("雪兰", "我是被遗弃的医院时代女主~"),
-                choice("雪兰", "您想进入已被遗弃的旧剧本的哪个地图作为测试？", [
-                  {
-                    label: "后院",
-                    then: [
-                      say("雪兰", "请...请等一下！"),
-                      say("雪兰", "可以请你...关注我们吗？"),
-                      { op: "go", to: "yard", tp: 1, face: "up" },
-                    ],
-                  },
-                  {
-                    label: "雪兰的病房",
-                    then: [
-                      say("雪兰", "请...请等一下！"),
-                      say("雪兰", "可以请你...关注我们吗？"),
-                      { op: "go", to: "ward", tp: 1, face: "up" },
-                    ],
-                  },
-                ]),
-              ],
-            },
-          ]),
-        ],
-      },
-      {
-        label: "不要选这个",
-        then: [
-          say("？？？", "很抱歉，您选错了，重新考虑一下吧？", "immerse"),
-          choice("？？？", "请重新考虑一下", [
-            {
-              label: "不要选这个",
-              then: [
-                say("？？？", "您很幸运地进入了我们的与游戏本体交互的测试环节。", "immerse"),
-                say("？？？", "接下来我将测试：关闭这个游戏。", "immerse"),
-                { op: "exit" },
-              ],
-            },
-            { label: "选择我", then: [{ op: "goto", name: "c1" }] },
-          ]),
-        ],
-      },
-      {
-        label: "选这个药丸",
-        then: [
-          say("？？？", "Fatal Error: You selected a 药丸 item.", "immerse"),
-          say("？？？", "Sorry. The game is crashed.", "immerse"),
-          { op: "exit" },
-        ],
-      },
-    ]),
-  ],
   wake: [
     say("域零", "粟牙，粟牙..."),
     say("域零", "醒醒..."),

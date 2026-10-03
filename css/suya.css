@@ -1316,25 +1316,3 @@ button { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .title-clock { animation: none; }
 }
-
-#call {
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  display: grid;
-  place-items: center;
-  background: rgba(5, 6, 10, 0.72);
-}
-
-#call[hidden] { display: none !important; }
-
-.phone {
-  width: min(360px, calc(100% - 32px));
-  padding: 22px;
-  background: #12141a;
-  border: 1px solid var(--line);
-  text-align: center;
-}
-
-.phone-who { margin: 0; font-family: var(--serif); letter-spacing: 0.14em; font-size: 22px; }
-.phone-num, .phone-state { color: var(--muted); }
