@@ -68,6 +68,11 @@ function clearTimers() {
   if (rhythm?.raf) cancelAnimationFrame(rhythm.raf);
 }
 
+function syncDockSpace() {
+  const height = dock.hidden ? 0 : Math.ceil(dock.getBoundingClientRect().height);
+  shell.style.setProperty("--dock-space", `${height}px`);
+}
+
 function applyAtmosphere() {
   const scene = scenes[game.scene];
   shell.dataset.scene = game.scene;
@@ -116,6 +121,7 @@ function showTitle() {
   where.textContent = "";
   const cont = view.querySelector("#continue-btn");
   if (cont) cont.hidden = !hasSave();
+  syncDockSpace();
   applyAtmosphere();
   syncMusic();
   document.title = "粟牙";
@@ -159,6 +165,7 @@ function renderSpots() {
     host.append(spotButton(spot, true));
     dock.append(spotButton(spot, false));
   }
+  syncDockSpace();
 }
 
 function spotButton(spot, placed) {
@@ -716,7 +723,9 @@ document.addEventListener("keydown", (event) => {
     return;
   }
   if (event.key === "z" || event.key === "Z" || event.key === "Enter" || event.key === " ") {
-    if ((event.key === "Enter" || event.key === " ") && tag === "BUTTON") return;
+    const buttonFocused = (event.key === "Enter" || event.key === " ") && tag === "BUTTON";
+    const reading = game.phase === "line" || game.phase === "doc" || game.phase === "item" || game.phase === "wait";
+    if (buttonFocused && !reading) return;
     event.preventDefault();
     if (game.scene === "title" && game.phase === "idle" && !overlay) {
       startNew();
@@ -730,5 +739,6 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+window.addEventListener("resize", syncDockSpace);
 requestAnimationFrame(drawSky);
 showTitle();
