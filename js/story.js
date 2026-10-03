@@ -41,7 +41,6 @@ export const tracks = {
   corridor: "assets/bgm/obe.mp3",
   yard: "assets/bgm/crystal.mp3",
   star: "assets/bgm/theme.mp3",
-  shore: "assets/bgm/crystal.mp3",
 };
 
 export const scenes = {
@@ -106,11 +105,6 @@ export const scenes = {
       { id: "kit", label: "戒尺和烟", script: "kit", kind: "person", who: "粟牙" },
     ],
   },
-  shore: {
-    name: "对岸",
-    rain: "soft",
-    spots: [],
-  },
 };
 
 export const scripts = {
@@ -174,27 +168,7 @@ export const scripts = {
   ],
   glass: [say("", "玻璃上的反光里似乎有着些异样的东西...", "spy")],
   stain: [say("", "上面的字被褐色液体遮盖住了...", "spy")],
-  xiDoor: [
-    {
-      op: "if",
-      key: "dream",
-      equals: true,
-      then: [
-        {
-          op: "if",
-          key: "hasKey",
-          equals: true,
-          then: [
-            say("", "门缝里的风不像病房。钥匙转了一圈。", "spy"),
-            say("粟牙", "里面不是床。是雨停过的岸。"),
-            { op: "go", to: "shore" },
-          ],
-          else: [say("", "名牌仍写着兮的病房。门很轻，可没有钥匙。", "spy")],
-        },
-      ],
-      else: [say("", "兮的病房", "spy")],
-    },
-  ],
+  xiDoor: [say("", "兮的病房", "spy")],
   wall: [say("", "明明墙外是一条河，放眼望去却看不见彼岸。", "spy")],
   painting: [
     say("", "看起来是一副普通的画。", "spy"),
@@ -221,7 +195,6 @@ export const scripts = {
     say("", "这里好像有着什么东西...", "spy"),
     { op: "hide", id: "key" },
     { op: "item", id: "key" },
-    { op: "flag", key: "hasKey", value: true },
   ],
   yulingRain: [
     say("域零", "粟牙...？你也来这里避雨？"),
@@ -396,74 +369,7 @@ export const scripts = {
       "他（她）依然选择在此刻沉迷于幻境中...",
       "他（她）只需要一点点的幻想就好，只需要一点点...",
     ]),
-    choice("粟牙", "绿灯还亮着。", [
-      { label: "留在幻境里", then: [{ op: "ending" }] },
-      {
-        label: "把这场梦走完",
-        then: [
-          { op: "flag", key: "dream", value: true },
-          say("粟牙", "钟还停在三点。对岸不一定没有。"),
-          { op: "go", to: "corridor", tp: 3, face: "down", boot: "afterDream" },
-        ],
-      },
-    ]),
-  ],
-  afterDream: [
-    say("旁白", "画合上了。走廊的灯还是原来那盏。"),
-    say("粟牙", "雪兰站在绿灯里。域零在树下找她。林桔还等着一起走。"),
-    say("粟牙", "院里那把钥匙，不是随便落下的。"),
-    say("粟牙", "兮的病房。名牌还在。"),
-  ],
-  shoreYu: [
-    say("域零", "你从画里出来了。"),
-    say("粟牙", "你说她也许也靠着大树避雨。"),
-    say("域零", "河看不见彼岸，是因为我一直不肯往对岸看。"),
-    say("域零", "她就在这儿。不是绿灯里的幻影。是雪兰。"),
-    { op: "flag", key: "metYu", value: true },
-  ],
-  shoreXue: [
-    say("雪兰", "我以为人和人只能在雨里错过。"),
-    say("粟牙", "你在那个路口转了很多次身。"),
-    say("雪兰", "这次不用转了。你走过来了。"),
-    say("雪兰", "三点可以下课。人不必停在铃响以前。"),
-    { op: "flag", key: "metXue", value: true },
-  ],
-  shoreLin: [
-    say("林桔", "伞还在。你当时说，当然可以。"),
-    say("粟牙", "那句话我没有收回。"),
-    say("林桔", "那就走到没有雨的地方。不用冲回去。"),
-    { op: "flag", key: "metLin", value: true },
-  ],
-  shoreEnd: [
-    {
-      op: "if",
-      key: "metYu",
-      equals: true,
-      then: [
-        {
-          op: "if",
-          key: "metXue",
-          equals: true,
-          then: [
-            {
-              op: "if",
-              key: "metLin",
-              equals: true,
-              then: [
-                say("粟牙", "和天下还是满的。我把它合上。"),
-                say("粟牙", "戒尺有八尺。从这岸到那岸，没有八尺那么远。"),
-                say("旁白", "聘书上剩下的三个月，第一次像一段可以上完的课。"),
-                { op: "flag", key: "crossed", value: true },
-                { op: "ending" },
-              ],
-              else: [say("粟牙", "还差一个人。这条岸不是一个人走完的。")],
-            },
-          ],
-          else: [say("粟牙", "雪兰还在回头。先去找她。")],
-        },
-      ],
-      else: [say("粟牙", "域零还站在看不见表岸的地方。")],
-    },
+    { op: "ending" },
   ],
   xstar: [
     { op: "mark", id: "xstar" },

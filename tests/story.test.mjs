@@ -104,16 +104,6 @@ test("the key is picked up once and the last green light ends", () => {
   assert.ok(end.seen.includes("ending"));
 });
 
-test("leaving the green light continues into the corridor", () => {
-  const woken = play("yustar10", (state) => {
-    const labels = state.current.options.map((option) => option.label);
-    if (labels.includes("把这场梦走完")) return labels.indexOf("把这场梦走完");
-    return 0;
-  });
-  assert.equal(woken.game.flags.dream, true);
-  assert.ok(woken.seen.includes("go:corridor"));
-});
-
 test("every script can be walked", () => {
   for (const name of Object.keys(scripts)) play(name, () => 0);
 });
