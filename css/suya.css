@@ -1262,6 +1262,53 @@ button { cursor: pointer; }
   color: #f4efe6;
 }
 
+#view { position: relative; }
+
+.rpg { background: #12141a; }
+
+#world {
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+}
+
+.pad {
+  position: absolute;
+  left: 10px;
+  bottom: 12px;
+  z-index: 4;
+  display: grid;
+  grid-template-areas: ". up ." "left down right";
+  gap: 4px;
+  touch-action: none;
+}
+
+.pad button {
+  width: 52px;
+  height: 42px;
+  padding: 0;
+  border: 0;
+  color: #241c16;
+  background: url("../assets/ui/button.png") center / 100% 100% no-repeat;
+}
+
+.pad button[data-dir="up"] { grid-area: up; }
+.pad button[data-dir="left"] { grid-area: left; }
+.pad button[data-dir="down"] { grid-area: down; }
+.pad button[data-dir="right"] { grid-area: right; }
+
+#act-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 18px;
+  z-index: 4;
+  min-width: 132px;
+}
+
+#shell.is-busy .pad,
+#shell.is-busy #act-btn { visibility: hidden; }
+
 @keyframes clock-turn {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }

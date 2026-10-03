@@ -78,43 +78,16 @@
       </section>
     </template>
 
-    <template id="tpl-ward">
-      <div class="scene scene-ward">
-        <div class="stage-bg"></div>
-        <img class="cast-fig ward-xue" src="assets/characters/xuelan.png" alt="雪兰" data-who="雪兰" />
-        <img class="cast-fig ward-yu" src="assets/characters/yuling.png" alt="域零" data-who="域零" data-spot="yuling" />
-        <img class="cast-fig ward-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
-        <div class="spots"></div>
-      </div>
-    </template>
-
-    <template id="tpl-corridor">
-      <div class="scene scene-hall">
-        <div class="stage-bg"></div>
-        <div class="painting"><div class="slit"></div></div>
-        <img class="cast-fig hall-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
-        <div class="spots"></div>
-      </div>
-    </template>
-
-    <template id="tpl-yard">
-      <div class="scene scene-yard">
-        <div class="stage-bg"></div>
-        <img class="cast-fig yard-lin" src="assets/characters/linju.png" alt="林桔" data-who="林桔" data-spot="linju" />
-        <img class="cast-fig yard-yu" src="assets/characters/yuling.png" alt="域零" data-who="域零" data-spot="yuling-yard" />
-        <img class="cast-fig yard-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
-        <div class="spots"></div>
-      </div>
-    </template>
-
-    <template id="tpl-star">
-      <div class="scene scene-star">
-        <div class="stage-bg"></div>
-        <img class="cast-fig star-yu" src="assets/characters/yuling.png" alt="域零" data-who="域零" data-spot="yushit" />
-        <img class="cast-fig star-xue" src="assets/characters/xuelan.png" alt="雪兰" data-who="雪兰" data-spot="yustar5" />
-        <img class="cast-fig star-xi" src="assets/characters/xi.png" alt="兮" data-who="兮" data-spot="xstar" />
-        <img class="cast-fig star-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
-        <div class="spots"></div>
+    <template id="tpl-play">
+      <div class="scene rpg">
+        <canvas id="world"></canvas>
+        <div class="pad" aria-label="移动">
+          <button type="button" data-dir="up" aria-label="上">↑</button>
+          <button type="button" data-dir="left" aria-label="左">←</button>
+          <button type="button" data-dir="down" aria-label="下">↓</button>
+          <button type="button" data-dir="right" aria-label="右">→</button>
+        </div>
+        <button type="button" id="act-btn" class="ui-pill" data-action="act">调查</button>
       </div>
     </template>
 

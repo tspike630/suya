@@ -9,10 +9,11 @@ Included from https://github.com/MorizeroDev/Starvior (Copyright (c) 2021 MoriDe
 - Dialogue UI drawn for the game
 - Music by Noveky: Crystal (2019), 20210206_7_ShortVer, whisper_, OBE_Loops
 - Dialogue scripts, with the protagonist's name changed to 粟牙
+- Map tiles placed in the original ward, corridor, yard, and painted world, taken from that repository so those rooms can be walked again
 
 Not included, because Starvior's ThirdParty.md says they cannot be used outside their original engines or stores:
 
-- RPG Maker MV map tiles
+- RPG Maker MV tiles that are not already part of the Starvior map folder
 - Smile Game Builder sound effects
 - Unity Asset Store packages (Rain Maker, Starfield Skybox, UI sound packs, Translucent Image)
 - Adobe Audition library audio
