@@ -920,3 +920,215 @@ button { cursor: pointer; }
   .portrait-img { height: min(220px, 32vh); }
   .tag, .keys { letter-spacing: 0.04em; }
 }
+
+.title-screen {
+  position: relative;
+  display: block;
+  height: 100%;
+  padding: 0;
+}
+
+.cast {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 8%;
+  height: auto;
+  width: auto;
+  align-items: flex-end;
+}
+
+.cast img,
+.cast .lead {
+  height: 100%;
+  max-width: none;
+  width: auto;
+}
+
+.title-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 96px 16px 14px;
+  background: linear-gradient(transparent, rgba(7, 8, 12, 0.15) 18%, rgba(7, 8, 12, 0.94) 58%);
+}
+
+.stage-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+
+.scene::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20%;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(transparent, rgba(7, 8, 12, 0.72));
+}
+
+.scene-ward .stage-bg {
+  background:
+    radial-gradient(ellipse at 16% 80%, rgba(226, 184, 120, 0.26), transparent 26%),
+    linear-gradient(#1c1e28 0%, #14161c 62%, #0e1014 100%);
+}
+
+.scene-ward .stage-bg::before {
+  content: "";
+  position: absolute;
+  left: 33%;
+  top: 5%;
+  width: 34%;
+  height: 26%;
+  background:
+    linear-gradient(#d7c4a2, #d7c4a2) 50% 0 / 2px 100% no-repeat,
+    linear-gradient(#d7c4a2, #d7c4a2) 0 50% / 100% 2px no-repeat,
+    radial-gradient(circle at 68% 28%, #3a5874, #0c1218 70%);
+  box-shadow: 0 0 0 7px #3a332c;
+}
+
+.scene-hall .stage-bg {
+  background: linear-gradient(#12141a, #1c1e26 40%, #2a2824 100%);
+}
+
+.scene-hall .stage-bg::before {
+  content: "";
+  position: absolute;
+  left: 24%;
+  right: 24%;
+  top: 0;
+  height: 52%;
+  background: #101218;
+  clip-path: polygon(0 0, 100% 0, 72% 100%, 28% 100%);
+}
+
+.scene-hall .painting {
+  position: absolute;
+  left: 7%;
+  top: 16%;
+  z-index: 1;
+  width: 86px;
+  height: 112px;
+  background:
+    linear-gradient(#163044, #102018) center / calc(100% - 10px) calc(100% - 10px) no-repeat,
+    #6a5438;
+}
+
+.scene-yard .stage-bg {
+  background:
+    radial-gradient(ellipse at 22% 88%, rgba(70, 110, 80, 0.35), transparent 32%),
+    linear-gradient(#101820 0%, #1a3040 42%, #15241c 100%);
+}
+
+.scene-star .stage-bg {
+  background: radial-gradient(ellipse at 50% 100%, rgba(226, 196, 138, 0.1), transparent 42%);
+}
+
+.cast-fig {
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  height: 98%;
+  width: auto;
+  max-width: 52%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 16px 14px rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+
+.ward-xue { left: -4%; }
+.ward-yu { right: -6%; height: 92%; }
+.ward-su { left: 30%; height: 76%; z-index: 3; }
+.hall-su { left: 50%; height: 94%; transform: translateX(-50%); }
+.yard-lin { left: -3%; }
+.yard-yu { right: -4%; height: 92%; }
+.yard-su { left: 33%; height: 74%; z-index: 3; }
+.star-yu { left: -6%; height: 88%; }
+.star-xue { left: 22%; }
+.star-xi { right: -4%; height: 84%; }
+.star-su { left: 6%; height: 64%; z-index: 3; }
+
+.scene.is-talking .cast-fig {
+  opacity: 0.4;
+  filter: brightness(0.6) saturate(0.8);
+}
+
+.scene.is-talking .cast-fig.is-on {
+  opacity: 1;
+  filter: drop-shadow(0 16px 14px rgba(0, 0, 0, 0.5));
+  z-index: 3;
+}
+
+#panel.dialog-wrap.mode-immerse,
+#panel.dialog-wrap.mode-spy {
+  top: auto;
+  display: block;
+  background: none;
+}
+
+.dialog,
+.mode-immerse .dialog,
+.mode-spy .dialog {
+  display: block;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0;
+  min-height: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  text-align: left;
+}
+
+.speech {
+  border-style: solid;
+  border-width: 18px 26px 22px;
+  border-image: url("../assets/ui/dialog.png") 60 fill stretch;
+  color: #241c16;
+  min-height: 88px;
+}
+
+.speech .name {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  margin: 0 0 4px;
+  padding: 0 14px;
+  background: url("../assets/ui/namebar.png") center / 100% 100% no-repeat;
+  color: #f7f1e6;
+}
+
+.speech p,
+.mode-immerse .speech p,
+.wait-line {
+  color: #241c16;
+  font-family: var(--sans);
+  font-size: 18px;
+}
+
+.choices button {
+  border-style: solid;
+  border-width: 0 22px;
+  border-image: url("../assets/ui/choice.png") 0 90 fill stretch;
+  background: none;
+  color: #241c16;
+  min-height: 42px;
+}
+
+#dock {
+  border-top: 0;
+  background: rgba(7, 8, 12, 0.92);
+}
+
+@media (max-width: 720px) {
+  .cast { bottom: 24%; height: auto; }
+  .cast img, .cast .lead { max-width: none; height: 100%; }
+  .title-copy { padding-top: 36px; }
+  .ward-su, .yard-su, .star-su { height: 56%; }
+  .speech p { font-size: 16px; }
+}

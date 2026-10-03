@@ -49,7 +49,7 @@ export const scenes = {
     rain: "window",
     spots: [
       { id: "board", label: "备课", x: 14, y: 38, script: "instruction", kind: "object" },
-      { id: "kit", label: "戒尺和烟", x: 30, y: 84, script: "kit", kind: "object" },
+      { id: "kit", label: "戒尺和烟", script: "kit", kind: "person", who: "粟牙" },
       { id: "yuling", label: "域零", x: 70, y: 62, script: "wake", kind: "person", who: "域零" },
       { id: "bed", label: "病床", x: 28, y: 70, script: "bed", kind: "object" },
       { id: "to-corridor", label: "走廊", x: 88, y: 48, go: "corridor", kind: "door" },
@@ -66,6 +66,7 @@ export const scenes = {
       { id: "painting", label: "画", x: 30, y: 52, script: "painting", kind: "object" },
       { id: "xi", label: "兮的病房", x: 50, y: 42, script: "xiDoor", kind: "door" },
       { id: "rhythm", label: "空走廊", x: 62, y: 72, script: "shuttle", kind: "object" },
+      { id: "kit", label: "戒尺和烟", script: "kit", kind: "person", who: "粟牙" },
       { id: "to-ward", label: "雪兰的病房", x: 16, y: 58, go: "ward", kind: "door" },
       { id: "to-yard", label: "后院", x: 84, y: 58, go: "yard", kind: "door" },
     ],
@@ -78,6 +79,7 @@ export const scenes = {
       { id: "wall", label: "围墙", x: 50, y: 36, script: "wall", kind: "object" },
       { id: "yuling-yard", label: "域零", x: 36, y: 64, script: "yulingRain", kind: "person", who: "域零", hide: "yuling-yard" },
       { id: "linju", label: "林桔", x: 68, y: 66, script: "linju", kind: "person", who: "林桔" },
+      { id: "kit", label: "戒尺和烟", script: "kit", kind: "person", who: "粟牙" },
       { id: "key", label: "地上的东西", x: 58, y: 80, script: "yardKey", kind: "object", hide: "key" },
     ],
   },
@@ -100,6 +102,7 @@ export const scenes = {
       { id: "yustar10", label: "雪兰 · 六", x: 84, y: 22, script: "yustar10", kind: "echo", seen: "yustar10", who: "雪兰" },
       { id: "xstar", label: "兮", x: 50, y: 24, script: "xstar", kind: "echo", seen: "xstar", who: "兮" },
       { id: "toyou", label: "？", x: 64, y: 14, script: "toyou", kind: "echo", seen: "toyou" },
+      { id: "kit", label: "戒尺和烟", script: "kit", kind: "person", who: "粟牙" },
     ],
   },
 };

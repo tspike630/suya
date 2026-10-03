@@ -34,10 +34,8 @@
       <section class="title-screen">
         <div class="cast" aria-hidden="true">
           <img src="assets/characters/xuelan.png" alt="" />
-          <img src="assets/characters/yuling.png" alt="" />
           <img class="lead" src="assets/characters/suya.png" alt="" />
-          <img src="assets/characters/linju.png" alt="" />
-          <img src="assets/characters/xi.png" alt="" />
+          <img src="assets/characters/yuling.png" alt="" />
         </div>
         <div class="title-copy">
           <p class="eyebrow">作品 / 主人公</p>
@@ -87,60 +85,40 @@
 
     <template id="tpl-ward">
       <div class="scene scene-ward">
-        <div class="wall"></div>
-        <div class="window">
-          <div class="pane"></div>
-          <div class="mullion"></div>
-        </div>
-        <div class="lamp"></div>
-        <div class="board-art"></div>
-        <div class="bed-art">
-          <div class="sheet"></div>
-          <div class="pillow"></div>
-          <i class="chibi bed-chibi" style="background-image:url(assets/sprites/xuelan.png)"></i>
-        </div>
-        <div class="door-art right"></div>
-        <div class="floor"></div>
-        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="stage-bg"></div>
+        <img class="cast-fig ward-xue" src="assets/characters/xuelan.png" alt="雪兰" data-who="雪兰" />
+        <img class="cast-fig ward-yu" src="assets/characters/yuling.png" alt="域零" data-who="域零" data-spot="yuling" />
+        <img class="cast-fig ward-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
         <div class="spots"></div>
       </div>
     </template>
 
     <template id="tpl-corridor">
       <div class="scene scene-hall">
-        <div class="ceiling"></div>
-        <div class="side left"></div>
-        <div class="side right"></div>
-        <div class="far-door"></div>
-        <div class="door-art left"></div>
-        <div class="door-art right"></div>
-        <div class="clock-art"><i></i><i></i></div>
-        <div class="painting"><div class="canvas-art"></div><div class="slit"></div></div>
-        <div class="fluor"></div>
-        <div class="floor"></div>
-        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="stage-bg"></div>
+        <div class="painting"><div class="slit"></div></div>
+        <img class="cast-fig hall-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
         <div class="spots"></div>
       </div>
     </template>
 
     <template id="tpl-yard">
       <div class="scene scene-yard">
-        <div class="night-sky"></div>
-        <div class="river"></div>
-        <div class="yard-wall"></div>
-        <div class="tree"><i class="crown"></i><i class="trunk"></i></div>
-        <div class="ground"></div>
-        <div class="puddle"></div>
-        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="stage-bg"></div>
+        <img class="cast-fig yard-lin" src="assets/characters/linju.png" alt="林桔" data-who="林桔" data-spot="linju" />
+        <img class="cast-fig yard-yu" src="assets/characters/yuling.png" alt="域零" data-who="域零" data-spot="yuling-yard" />
+        <img class="cast-fig yard-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
         <div class="spots"></div>
       </div>
     </template>
 
     <template id="tpl-star">
       <div class="scene scene-star">
-        <div class="road"></div>
-        <div class="mirror"><i></i></div>
-        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="stage-bg"></div>
+        <img class="cast-fig star-yu" src="assets/characters/yuling.png" alt="域零" data-who="域零" data-spot="yushit" />
+        <img class="cast-fig star-xue" src="assets/characters/xuelan.png" alt="雪兰" data-who="雪兰" data-spot="yustar5" />
+        <img class="cast-fig star-xi" src="assets/characters/xi.png" alt="兮" data-who="兮" data-spot="xstar" />
+        <img class="cast-fig star-su" src="assets/characters/suya.png" alt="粟牙" data-who="粟牙" data-spot="kit" />
         <div class="spots"></div>
       </div>
     </template>

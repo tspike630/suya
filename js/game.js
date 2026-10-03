@@ -162,8 +162,16 @@ function renderSpots() {
   dock.replaceChildren();
   const visible = scene.spots.filter((spot) => !spot.hide || !game.hidden[spot.hide]);
   for (const spot of visible) {
-    host.append(spotButton(spot, true));
+    const fig = view.querySelector(`.cast-fig[data-spot="${spot.id}"]`);
+    if (fig) {
+      fig.hidden = false;
+      fig.classList.toggle("is-seen", Boolean(spot.seen && game.seen[spot.seen]));
+    }
     dock.append(spotButton(spot, false));
+  }
+  for (const fig of view.querySelectorAll(".cast-fig[data-spot]")) {
+    const spot = scene.spots.find((item) => item.id === fig.dataset.spot);
+    if (spot?.hide && game.hidden[spot.hide]) fig.hidden = true;
   }
   syncDockSpace();
 }
@@ -215,6 +223,17 @@ function closeLayer() {
   panel.className = "";
   delete shell.dataset.fx;
   shell.classList.remove("is-busy");
+  highlight("");
+}
+
+function highlight(who) {
+  const scene = view.querySelector(".scene");
+  if (!scene) return;
+  const known = Boolean(who && people[who]);
+  scene.classList.toggle("is-talking", known);
+  for (const fig of scene.querySelectorAll(".cast-fig")) {
+    fig.classList.toggle("is-on", known && fig.dataset.who === who);
+  }
 }
 
 function openScript(commands) {
@@ -282,16 +301,9 @@ function renderLine() {
   const cmd = game.current;
   const mode = cmd.mode || "box";
   panel.className = `dialog-wrap mode-${mode}`;
+  highlight(cmd.who);
   const article = document.createElement("article");
   article.className = "dialog";
-  const person = people[cmd.who];
-  if (mode === "box" && person?.portrait) {
-    const img = document.createElement("img");
-    img.className = "portrait-img";
-    img.src = person.portrait;
-    img.alt = "";
-    article.append(img);
-  }
   const speech = document.createElement("div");
   speech.className = "speech";
   const who = cmd.who || (mode === "spy" ? "调查" : "旁白");
@@ -349,16 +361,9 @@ function renderChoice() {
   clearTimers();
   const cmd = game.current;
   panel.className = "dialog-wrap mode-box";
+  highlight(cmd.who);
   const article = document.createElement("article");
   article.className = "dialog";
-  const person = people[cmd.who];
-  if (person?.portrait) {
-    const img = document.createElement("img");
-    img.className = "portrait-img";
-    img.src = person.portrait;
-    img.alt = "";
-    article.append(img);
-  }
   const speech = document.createElement("div");
   speech.className = "speech";
   speech.append(element("h2", "name", cmd.who || "选择"));
