@@ -10,11 +10,15 @@
 
 ## 打开
 
+网页：https://tspike630.github.io/suya/
+
+本地：
+
 ```bash
 python3 -m http.server 4173
 ```
 
-浏览器打开 http://localhost:4173 。
+然后打开 http://localhost:4173 。
 
 ## 操作
 
