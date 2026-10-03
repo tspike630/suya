@@ -32,8 +32,8 @@ function play(name, choose) {
       game.phase = "idle";
       break;
     }
-    if (game.phase === "ending") {
-      seen.push("ending");
+    if (game.phase === "ending" || game.phase === "exit") {
+      seen.push(game.phase);
       game.phase = "idle";
       break;
     }
@@ -102,6 +102,24 @@ test("the key is picked up once and the last green light ends", () => {
   assert.equal(found.game.hidden.key, true);
   const end = play("yustar10", () => 0);
   assert.ok(end.seen.includes("ending"));
+});
+
+test("the original opening enters a map or closes the game", () => {
+  const entered = play("obe", (state) => {
+    const labels = state.current.options.map((option) => option.label);
+    if (labels.includes("选我")) return labels.indexOf("选我");
+    if (labels.includes("我是正确选项")) return labels.indexOf("我是正确选项");
+    if (labels.includes("键盘鼠标")) return labels.indexOf("键盘鼠标");
+    if (labels.includes("后院")) return labels.indexOf("后院");
+    return 0;
+  });
+  assert.ok(entered.seen.includes("go:yard"));
+  const crashed = play("obe", (state) => {
+    const labels = state.current.options.map((option) => option.label);
+    if (labels.includes("选这个药丸")) return labels.indexOf("选这个药丸");
+    return 0;
+  });
+  assert.ok(crashed.seen.includes("exit"));
 });
 
 test("every script can be walked", () => {

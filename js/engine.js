@@ -12,6 +12,9 @@ const OPS = new Set([
   "rhythm",
   "go",
   "ending",
+  "label",
+  "goto",
+  "exit",
 ]);
 
 export function createGame() {
@@ -66,14 +69,31 @@ export function restore(game, data) {
   return true;
 }
 
+function indexLabels(commands, labels = {}) {
+  for (let i = 0; i < commands.length; i += 1) {
+    const cmd = commands[i];
+    if (!cmd || typeof cmd !== "object") continue;
+    if (cmd.op === "label") labels[cmd.name] = commands.slice(i + 1);
+    if (cmd.then) indexLabels(cmd.then, labels);
+    if (cmd.else) indexLabels(cmd.else, labels);
+    if (cmd.options) {
+      for (const option of cmd.options) {
+        if (option.then) indexLabels(option.then, labels);
+      }
+    }
+  }
+  return labels;
+}
+
 export function launch(game, commands) {
+  game.labels = indexLabels(commands, game.labels || {});
   game.queue = commands.concat(game.queue);
   if (game.phase === "idle") pump(game);
 }
 
 export function continueGame(game, input = {}) {
   if (game.phase === "idle") return false;
-  if (game.phase === "go" || game.phase === "ending") return false;
+  if (game.phase === "go" || game.phase === "ending" || game.phase === "exit") return false;
   if (game.phase === "choice") {
     const index = input.choice;
     const options = game.current.options;
@@ -142,6 +162,17 @@ function pump(game) {
         return;
       case "go":
         game.phase = "go";
+        game.current = cmd;
+        return;
+      case "label":
+        break;
+      case "goto": {
+        const rest = game.labels && game.labels[cmd.name];
+        if (rest) game.queue = rest.slice();
+        break;
+      }
+      case "exit":
+        game.phase = "exit";
         game.current = cmd;
         return;
       case "ending":

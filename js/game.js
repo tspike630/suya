@@ -1,6 +1,6 @@
-import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=8";
-import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=8";
-import { maps } from "./maps.js?v=8";
+import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=9";
+import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=9";
+import { maps } from "./maps.js?v=9";
 
 const SAVE_KEY = "suya-save";
 const MUTE_KEY = "suya-mute";
@@ -231,6 +231,69 @@ function enterMap(id, tp, face) {
   applyAtmosphere();
   syncMusic();
   refreshAct();
+  armCall();
+}
+
+let callTimer = 0;
+
+function armCall() {
+  if (game.flags.called) return;
+  if (game.scene !== "ward" && game.scene !== "yard" && game.scene !== "corridor") return;
+  clearTimeout(callTimer);
+  callTimer = setTimeout(() => {
+    if (game.flags.called || !canWalk()) return;
+    game.flags.called = true;
+    showCall(false);
+  }, 8000);
+}
+
+function showCall(answered) {
+  const call = document.querySelector("#call");
+  if (!call) return;
+  call.hidden = false;
+  overlay = "call";
+  shell.classList.add("is-busy");
+  call.replaceChildren();
+  const card = document.createElement("div");
+  card.className = "phone";
+  card.append(element("p", "phone-who", "未知联系人"));
+  card.append(element("p", "phone-num", "15716062711  福建 龙岩"));
+  if (!answered) {
+    card.append(element("p", "phone-state", "连接中"));
+    const row = document.createElement("div");
+    row.className = "row";
+    const yes = element("button", "primary", "接听");
+    yes.type = "button";
+    yes.dataset.action = "answer-call";
+    const no = element("button", "text-btn", "拒绝");
+    no.type = "button";
+    no.dataset.action = "end-call";
+    row.append(yes, no);
+    card.append(row);
+  } else {
+    const timer = element("p", "phone-state", "00:00");
+    card.append(timer);
+    const hang = element("button", "text-btn", "挂断");
+    hang.type = "button";
+    hang.dataset.action = "end-call";
+    card.append(hang);
+    let tick = 0;
+    const clock = setInterval(() => {
+      tick += 1;
+      const minute = String(Math.floor(tick / 60)).padStart(2, "0");
+      const second = String(tick % 60).padStart(2, "0");
+      timer.textContent = `${minute}:${second}`;
+      if (call.hidden) clearInterval(clock);
+    }, 1000);
+  }
+  call.append(card);
+}
+
+function endCall() {
+  const call = document.querySelector("#call");
+  if (call) call.hidden = true;
+  if (overlay === "call") overlay = null;
+  shell.classList.remove("is-busy");
 }
 
 function overlap(a, b) {
@@ -514,10 +577,18 @@ function openScript(commands) {
 
 function renderPhase() {
   if (game.phase === "go") {
-    const to = game.current.to;
+    const cmd = game.current;
     game.phase = "idle";
     game.current = null;
-    enterMap(to);
+    enterMap(cmd.to, cmd.tp, cmd.face);
+    if (cmd.boot && scripts[cmd.boot]) openScript(scripts[cmd.boot]);
+    return;
+  }
+  if (game.phase === "exit") {
+    game.phase = "idle";
+    game.current = null;
+    overlay = "exit";
+    renderExit();
     return;
   }
   if (game.phase === "ending") {
@@ -766,6 +837,20 @@ function markHit(ok) {
   }, 280);
 }
 
+function renderExit() {
+  openLayer();
+  panel.className = "sheet";
+  const card = document.createElement("article");
+  card.className = "ending";
+  card.append(element("h2", "", "关闭"));
+  card.append(element("p", "", "游戏已关闭。"));
+  const btn = element("button", "primary", "回到标题");
+  btn.type = "button";
+  btn.dataset.action = "title";
+  card.append(btn);
+  panel.replaceChildren(card);
+}
+
 function renderEnding() {
   openLayer();
   panel.className = "sheet";
@@ -844,7 +929,7 @@ function closeMenu() {
 }
 
 function onAdvance() {
-  if (overlay === "menu" || overlay === "ending") return;
+  if (overlay === "menu" || overlay === "ending" || overlay === "call") return;
   if (game.phase === "rhythm" && !rhythm?.done) return;
   if (game.phase === "choice") return;
   if (game.phase === "line" && !lineDone) {
@@ -868,9 +953,9 @@ function startNew() {
   for (const key of Object.keys(game)) delete game[key];
   Object.assign(game, fresh);
   giveKit(game);
+  game.flags.called = false;
   unlockAudio();
-  enterMap("ward");
-  persist();
+  openScript(scripts.boot);
 }
 
 function continueSave() {
@@ -902,7 +987,9 @@ function giveKit(state) {
 }
 
 function onAction(action, node) {
-  if (action === "start") startNew();
+  if (action === "answer-call") showCall(true);
+  else if (action === "end-call") endCall();
+  else if (action === "start") startNew();
   else if (action === "continue") continueSave();
   else if (action === "menu") openMenu();
   else if (action === "close-menu") closeMenu();
