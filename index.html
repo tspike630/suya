@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/suya.css" />
+    <link rel="stylesheet" href="css/suya.css?v=6" />
   </head>
   <body>
     <div id="shell" data-scene="title" data-rain="soft">
@@ -21,7 +21,26 @@
         <button type="button" id="sound-btn" data-action="mute" hidden>声音</button>
         <button type="button" id="menu-btn" data-action="menu" hidden>菜单</button>
       </header>
-      <main id="view"></main>
+      <main id="view">
+        <section class="title-screen">
+          <div class="cast" aria-hidden="true">
+            <img src="assets/characters/xuelan.png" alt="" />
+            <img class="lead" src="assets/characters/suya.png" alt="" />
+            <img src="assets/characters/yuling.png" alt="" />
+          </div>
+          <div class="title-copy">
+            <p class="eyebrow">作品 / 主人公</p>
+            <h1><span>粟</span><i aria-hidden="true"></i><span>牙</span></h1>
+            <p class="tag">物理教师 · 八尺戒尺 · 抽不完的和天下</p>
+            <div class="title-actions">
+              <button type="button" class="primary" data-action="start">进入</button>
+              <button type="button" class="primary ghost" id="continue-btn" data-action="continue" hidden>继续</button>
+              <button type="button" class="text-btn" data-action="about">关于</button>
+            </div>
+            <p class="keys">Z / Enter 继续 · X 读完这句 · 点击调查</p>
+          </div>
+        </section>
+      </main>
       <nav id="dock" aria-label="可调查的事物" hidden></nav>
       <div id="layer" hidden>
         <button type="button" id="catcher" data-action="advance" aria-label="继续"></button>
@@ -124,6 +143,6 @@
     </template>
 
     <noscript>需要启用 JavaScript，才能进入《粟牙》。</noscript>
-    <script type="module" src="js/game.js"></script>
+    <script type="module" src="js/game.js?v=6"></script>
   </body>
 </html>

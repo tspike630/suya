@@ -39,7 +39,9 @@ button { cursor: pointer; }
 
 #shell {
   width: min(1080px, 100%);
-  height: min(760px, 100dvh);
+  height: 100vh;
+  height: 100dvh;
+  max-height: 760px;
   position: relative;
   display: grid;
   grid-template-rows: 52px minmax(0, 1fr) auto;

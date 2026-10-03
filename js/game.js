@@ -1,5 +1,5 @@
-import { continueGame, createGame, launch, restore, serialize } from "./engine.js";
-import { items, people, scenes, scripts, startingItems, tracks } from "./story.js";
+import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=6";
+import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=6";
 
 const SAVE_KEY = "suya-save";
 const MUTE_KEY = "suya-mute";
