@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#07080c" />
+    <title>粟牙</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23f2e2b8' d='M8 1 9.2 6.2 14.5 7.2 9.2 8.4 8 14 6.8 8.4 1.5 7.2 6.8 6.2Z'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/suya.css" />
+  </head>
+  <body>
+    <div id="shell" data-scene="title" data-rain="soft">
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="rain" aria-hidden="true"></div>
+      <header id="top">
+        <div class="brand">粟牙</div>
+        <div id="where"></div>
+        <button type="button" id="sound-btn" data-action="mute" hidden>声音</button>
+        <button type="button" id="menu-btn" data-action="menu" hidden>菜单</button>
+      </header>
+      <main id="view"></main>
+      <nav id="dock" aria-label="可调查的事物" hidden></nav>
+      <div id="layer" hidden>
+        <button type="button" id="catcher" data-action="advance" aria-label="继续"></button>
+        <div id="panel"></div>
+      </div>
+      <p id="toast" hidden></p>
+    </div>
+
+    <template id="tpl-title">
+      <section class="title-screen">
+        <div class="cast" aria-hidden="true">
+          <img src="assets/characters/xuelan.png" alt="" />
+          <img src="assets/characters/yuling.png" alt="" />
+          <img class="lead" src="assets/characters/suya.png" alt="" />
+          <img src="assets/characters/linju.png" alt="" />
+          <img src="assets/characters/xi.png" alt="" />
+        </div>
+        <div class="title-copy">
+          <p class="eyebrow">作品 / 主人公</p>
+          <h1><span>粟</span><i aria-hidden="true"></i><span>牙</span></h1>
+          <p class="tag">物理教师 · 八尺戒尺 · 抽不完的和天下</p>
+          <div class="title-actions">
+            <button type="button" class="primary" data-action="start">进入</button>
+            <button type="button" class="primary ghost" id="continue-btn" data-action="continue" hidden>继续</button>
+            <button type="button" class="text-btn" data-action="about">关于</button>
+          </div>
+          <p class="keys">Z / Enter 继续 · X 读完这句 · 点击调查</p>
+        </div>
+      </section>
+    </template>
+
+    <template id="tpl-about">
+      <article class="about">
+        <h1>关于《粟牙》</h1>
+        <p>这是一页可以走动的网页。作品名叫粟牙，主人公也叫粟牙。他是物理教师，随身带着八尺戒尺，和一包抽不完的和天下。聘书还剩三个月，雨下个不停。</p>
+        <p>对白来自森零制作组已经终止开发的《拾落星辰》（Starvior）。主人公在原作里叫奥伦。这一页把奥伦和作品名改成了粟牙，场景是原作 Alpha 里能走进去的病房、三楼走廊、后院和画中世界。</p>
+        <p>立绘是泺罗画的，行走图是 Diffileft 画的，曲子是 Noveky 作的。主人公在原作里叫奥伦，地图上用的是世原的样子。这一页里他叫粟牙。</p>
+        <div class="gallery">
+          <figure><img src="assets/characters/suya.png" alt="粟牙" /><figcaption>粟牙</figcaption></figure>
+          <figure><img src="assets/characters/yuling.png" alt="域零" /><figcaption>域零</figcaption></figure>
+          <figure><img src="assets/characters/xuelan.png" alt="雪兰" /><figcaption>雪兰</figcaption></figure>
+          <figure><img src="assets/characters/linju.png" alt="林桔" /><figcaption>林桔</figcaption></figure>
+          <figure><img src="assets/characters/xi.png" alt="兮" /><figcaption>兮</figcaption></figure>
+          <figure><img src="assets/characters/ailun.png" alt="艾伦" /><figcaption>艾伦</figcaption></figure>
+          <figure><img src="assets/characters/nami.png" alt="奈美" /><figcaption>奈美</figcaption></figure>
+          <figure><img src="assets/characters/xixi.png" alt="兮兮" /><figcaption>兮兮</figcaption></figure>
+          <figure><img src="assets/characters/wolf.png" alt="雪狼" /><figcaption>雪狼</figcaption></figure>
+        </div>
+        <p>地图块来自 RPG Maker，部分音效来自素材商店或曲库，原作声明不能拿到别的地方用，所以没有放进来。雨声是这页自己做的。</p>
+        <h2>怎么玩</h2>
+        <ul>
+          <li>点场景里的名字，或点底部的词，去调查、说话、开门。</li>
+          <li>Z、Enter、空格或点对话框，看下一句。X 把这一句一次读完。</li>
+          <li>画里有一条通道。走廊空地上可以踩点。</li>
+          <li>Esc 打开菜单。进度记在这台浏览器里。</li>
+        </ul>
+        <h2>原作</h2>
+        <p>制作 Buger404，导演 Wey，主笔 Shaye。人物与插画泺罗，Q 版与地图 Diffileft，音乐 Noveky。程序 Buger404，援助 YcMia。仓库使用 MIT 许可。详见本页的 NOTICE。</p>
+        <p><a href="https://github.com/MorizeroDev/Starvior">MorizeroDev/Starvior</a></p>
+        <button type="button" class="primary" data-action="back-title">返回</button>
+      </article>
+    </template>
+
+    <template id="tpl-ward">
+      <div class="scene scene-ward">
+        <div class="wall"></div>
+        <div class="window">
+          <div class="pane"></div>
+          <div class="mullion"></div>
+        </div>
+        <div class="lamp"></div>
+        <div class="board-art"></div>
+        <div class="bed-art">
+          <div class="sheet"></div>
+          <div class="pillow"></div>
+          <i class="chibi bed-chibi" style="background-image:url(assets/sprites/xuelan.png)"></i>
+        </div>
+        <div class="door-art right"></div>
+        <div class="floor"></div>
+        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="spots"></div>
+      </div>
+    </template>
+
+    <template id="tpl-corridor">
+      <div class="scene scene-hall">
+        <div class="ceiling"></div>
+        <div class="side left"></div>
+        <div class="side right"></div>
+        <div class="far-door"></div>
+        <div class="door-art left"></div>
+        <div class="door-art right"></div>
+        <div class="clock-art"><i></i><i></i></div>
+        <div class="painting"><div class="canvas-art"></div><div class="slit"></div></div>
+        <div class="fluor"></div>
+        <div class="floor"></div>
+        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="spots"></div>
+      </div>
+    </template>
+
+    <template id="tpl-yard">
+      <div class="scene scene-yard">
+        <div class="night-sky"></div>
+        <div class="river"></div>
+        <div class="yard-wall"></div>
+        <div class="tree"><i class="crown"></i><i class="trunk"></i></div>
+        <div class="ground"></div>
+        <div class="puddle"></div>
+        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="spots"></div>
+      </div>
+    </template>
+
+    <template id="tpl-star">
+      <div class="scene scene-star">
+        <div class="road"></div>
+        <div class="mirror"><i></i></div>
+        <div class="hero" aria-hidden="true"><i class="chibi" style="background-image:url(assets/sprites/suya.png)"></i><b>粟牙</b></div>
+        <div class="spots"></div>
+      </div>
+    </template>
+
+    <noscript>需要启用 JavaScript，才能进入《粟牙》。</noscript>
+    <script type="module" src="js/game.js"></script>
+  </body>
+</html>
