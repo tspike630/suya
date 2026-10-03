@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/suya.css?v=6" />
+    <link rel="stylesheet" href="css/suya.css?v=7" />
   </head>
   <body>
     <div id="shell" data-scene="title" data-rain="soft">
@@ -19,10 +19,16 @@
         <div class="brand">粟牙</div>
         <div id="where"></div>
         <button type="button" id="sound-btn" data-action="mute" hidden>声音</button>
-        <button type="button" id="menu-btn" data-action="menu" hidden>菜单</button>
+        <button type="button" id="menu-btn" data-action="menu" hidden><img src="assets/ui/set.png" alt="菜单" /></button>
       </header>
       <main id="view">
         <section class="title-screen">
+          <img class="frame-side left" src="assets/ui/side-left.png" alt="" />
+          <img class="frame-side right" src="assets/ui/side-right.png" alt="" />
+          <img class="title-clock" src="assets/ui/clock.png" alt="" />
+          <img class="title-star s1" src="assets/ui/star.png" alt="" />
+          <img class="title-star s2" src="assets/ui/star3.png" alt="" />
+          <img class="title-star s3" src="assets/ui/star4.png" alt="" />
           <div class="cast" aria-hidden="true">
             <img src="assets/characters/xuelan.png" alt="" />
             <img class="lead" src="assets/characters/suya.png" alt="" />
@@ -32,12 +38,11 @@
             <p class="eyebrow">作品 / 主人公</p>
             <h1><span>粟</span><i aria-hidden="true"></i><span>牙</span></h1>
             <p class="tag">物理教师 · 八尺戒尺 · 抽不完的和天下</p>
+            <button type="button" class="tap" data-action="start"><img src="assets/ui/tap.png" alt="按下任意键开始" /></button>
             <div class="title-actions">
-              <button type="button" class="primary" data-action="start">进入</button>
-              <button type="button" class="primary ghost" id="continue-btn" data-action="continue" hidden>继续</button>
-              <button type="button" class="text-btn" data-action="about">关于</button>
+              <button type="button" class="ui-pill" id="continue-btn" data-action="continue" hidden>继续</button>
+              <button type="button" class="ui-pill" data-action="about">关于</button>
             </div>
-            <p class="keys">Z / Enter 继续 · X 读完这句 · 点击调查</p>
           </div>
         </section>
       </main>
@@ -51,6 +56,12 @@
 
     <template id="tpl-title">
       <section class="title-screen">
+        <img class="frame-side left" src="assets/ui/side-left.png" alt="" />
+        <img class="frame-side right" src="assets/ui/side-right.png" alt="" />
+        <img class="title-clock" src="assets/ui/clock.png" alt="" />
+        <img class="title-star s1" src="assets/ui/star.png" alt="" />
+        <img class="title-star s2" src="assets/ui/star3.png" alt="" />
+        <img class="title-star s3" src="assets/ui/star4.png" alt="" />
         <div class="cast" aria-hidden="true">
           <img src="assets/characters/xuelan.png" alt="" />
           <img class="lead" src="assets/characters/suya.png" alt="" />
@@ -60,12 +71,11 @@
           <p class="eyebrow">作品 / 主人公</p>
           <h1><span>粟</span><i aria-hidden="true"></i><span>牙</span></h1>
           <p class="tag">物理教师 · 八尺戒尺 · 抽不完的和天下</p>
+          <button type="button" class="tap" data-action="start"><img src="assets/ui/tap.png" alt="按下任意键开始" /></button>
           <div class="title-actions">
-            <button type="button" class="primary" data-action="start">进入</button>
-            <button type="button" class="primary ghost" id="continue-btn" data-action="continue" hidden>继续</button>
-            <button type="button" class="text-btn" data-action="about">关于</button>
+            <button type="button" class="ui-pill" id="continue-btn" data-action="continue" hidden>继续</button>
+            <button type="button" class="ui-pill" data-action="about">关于</button>
           </div>
-          <p class="keys">Z / Enter 继续 · X 读完这句 · 点击调查</p>
         </div>
       </section>
     </template>
@@ -143,6 +153,6 @@
     </template>
 
     <noscript>需要启用 JavaScript，才能进入《粟牙》。</noscript>
-    <script type="module" src="js/game.js?v=6"></script>
+    <script type="module" src="js/game.js?v=7"></script>
   </body>
 </html>

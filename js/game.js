@@ -1,5 +1,5 @@
-import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=6";
-import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=6";
+import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=7";
+import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=7";
 
 const SAVE_KEY = "suya-save";
 const MUTE_KEY = "suya-mute";
@@ -311,7 +311,10 @@ function renderLine() {
   const line = element("p", "", "");
   line.id = "line";
   speech.append(line);
-  const caret = element("i", "caret", "");
+  const caret = document.createElement("img");
+  caret.className = "cont";
+  caret.alt = "";
+  caret.src = "assets/ui/continue.png";
   caret.hidden = true;
   speech.append(caret);
   article.append(speech);
