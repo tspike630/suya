@@ -1,6 +1,6 @@
-import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=8";
-import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=8";
-import { maps } from "./maps.js?v=8";
+import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=10";
+import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=10";
+import { maps } from "./maps.js?v=10";
 
 const SAVE_KEY = "suya-save";
 const MUTE_KEY = "suya-mute";
@@ -514,10 +514,11 @@ function openScript(commands) {
 
 function renderPhase() {
   if (game.phase === "go") {
-    const to = game.current.to;
+    const cmd = game.current;
     game.phase = "idle";
     game.current = null;
-    enterMap(to);
+    enterMap(cmd.to, cmd.tp, cmd.face);
+    if (cmd.boot && scripts[cmd.boot]) openScript(scripts[cmd.boot]);
     return;
   }
   if (game.phase === "ending") {
@@ -771,8 +772,8 @@ function renderEnding() {
   panel.className = "sheet";
   const card = document.createElement("article");
   card.className = "ending";
-  card.append(element("h2", "", "绿灯"));
-  card.append(element("p", "", "即便这只是一场终会醒来的梦..."));
+  card.append(element("h2", "", game.flags.crossed ? "对岸" : "绿灯"));
+  card.append(element("p", "", game.flags.crossed ? "雨停在身后。课还没有结束。" : "即便这只是一场终会醒来的梦..."));
   const row = document.createElement("div");
   row.className = "row";
   const leave = element("button", "primary", "离开");
