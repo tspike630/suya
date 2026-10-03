@@ -1,5 +1,5 @@
-import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=7";
-import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=7";
+import { continueGame, createGame, launch, restore, serialize } from "./engine.js?v=8";
+import { items, people, scenes, scripts, startingItems, tracks } from "./story.js?v=8";
 
 const SAVE_KEY = "suya-save";
 const MUTE_KEY = "suya-mute";
@@ -77,7 +77,7 @@ function applyAtmosphere() {
   const scene = scenes[game.scene];
   shell.dataset.scene = game.scene;
   let rain = "none";
-  if (game.scene === "title" || game.scene === "about") rain = "soft";
+  if (game.scene === "title") rain = "soft";
   else if (scene) rain = game.scene === "star" && game.weather === "heavy" ? "hard" : scene.rain;
   shell.dataset.rain = rain;
   shell.classList.toggle("is-busy", game.phase !== "idle" || overlay !== null);
@@ -125,15 +125,6 @@ function showTitle() {
   applyAtmosphere();
   syncMusic();
   document.title = "粟牙";
-}
-
-function showAbout() {
-  mount("about");
-  dock.hidden = true;
-  menuBtn.hidden = true;
-  where.textContent = "关于";
-  shell.dataset.scene = "about";
-  document.title = "粟牙 · 关于";
 }
 
 function goScene(id, opts = {}) {
@@ -643,10 +634,6 @@ function giveKit(state) {
 function onAction(action, node) {
   if (action === "start") startNew();
   else if (action === "continue") continueSave();
-  else if (action === "about") {
-    unlockAudio();
-    showAbout();
-  } else if (action === "back-title") showTitle();
   else if (action === "menu") openMenu();
   else if (action === "close-menu") closeMenu();
   else if (action === "advance") onAdvance();
@@ -722,7 +709,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     event.preventDefault();
     if (overlay === "menu") closeMenu();
-    else if (game.scene !== "title" && game.scene !== "about") openMenu();
+    else if (game.scene !== "title") openMenu();
     return;
   }
   if (event.key === "x" || event.key === "X") {

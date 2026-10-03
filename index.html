@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/suya.css?v=7" />
+    <link rel="stylesheet" href="css/suya.css?v=8" />
   </head>
   <body>
     <div id="shell" data-scene="title" data-rain="soft">
@@ -41,7 +41,6 @@
             <button type="button" class="tap" data-action="start"><img src="assets/ui/tap.png" alt="按下任意键开始" /></button>
             <div class="title-actions">
               <button type="button" class="ui-pill" id="continue-btn" data-action="continue" hidden>继续</button>
-              <button type="button" class="ui-pill" data-action="about">关于</button>
             </div>
           </div>
         </section>
@@ -73,43 +72,10 @@
           <p class="tag">物理教师 · 八尺戒尺 · 抽不完的和天下</p>
           <button type="button" class="tap" data-action="start"><img src="assets/ui/tap.png" alt="按下任意键开始" /></button>
           <div class="title-actions">
-            <button type="button" class="ui-pill" id="continue-btn" data-action="continue" hidden>继续</button>
-            <button type="button" class="ui-pill" data-action="about">关于</button>
+              <button type="button" class="ui-pill" id="continue-btn" data-action="continue" hidden>继续</button>
           </div>
         </div>
       </section>
-    </template>
-
-    <template id="tpl-about">
-      <article class="about">
-        <h1>关于《粟牙》</h1>
-        <p>这是一页可以走动的网页。作品名叫粟牙，主人公也叫粟牙。他是物理教师，随身带着八尺戒尺，和一包抽不完的和天下。聘书还剩三个月，雨下个不停。</p>
-        <p>对白来自森零制作组已经终止开发的《拾落星辰》（Starvior）。主人公在原作里叫奥伦。这一页把奥伦和作品名改成了粟牙，场景是原作 Alpha 里能走进去的病房、三楼走廊、后院和画中世界。</p>
-        <p>立绘是泺罗画的，行走图是 Diffileft 画的，曲子是 Noveky 作的。主人公在原作里叫奥伦，地图上用的是世原的样子。这一页里他叫粟牙。</p>
-        <div class="gallery">
-          <figure><img src="assets/characters/suya.png" alt="粟牙" /><figcaption>粟牙</figcaption></figure>
-          <figure><img src="assets/characters/yuling.png" alt="域零" /><figcaption>域零</figcaption></figure>
-          <figure><img src="assets/characters/xuelan.png" alt="雪兰" /><figcaption>雪兰</figcaption></figure>
-          <figure><img src="assets/characters/linju.png" alt="林桔" /><figcaption>林桔</figcaption></figure>
-          <figure><img src="assets/characters/xi.png" alt="兮" /><figcaption>兮</figcaption></figure>
-          <figure><img src="assets/characters/ailun.png" alt="艾伦" /><figcaption>艾伦</figcaption></figure>
-          <figure><img src="assets/characters/nami.png" alt="奈美" /><figcaption>奈美</figcaption></figure>
-          <figure><img src="assets/characters/xixi.png" alt="兮兮" /><figcaption>兮兮</figcaption></figure>
-          <figure><img src="assets/characters/wolf.png" alt="雪狼" /><figcaption>雪狼</figcaption></figure>
-        </div>
-        <p>地图块来自 RPG Maker，部分音效来自素材商店或曲库，原作声明不能拿到别的地方用，所以没有放进来。雨声是这页自己做的。</p>
-        <h2>怎么玩</h2>
-        <ul>
-          <li>点场景里的名字，或点底部的词，去调查、说话、开门。</li>
-          <li>Z、Enter、空格或点对话框，看下一句。X 把这一句一次读完。</li>
-          <li>画里有一条通道。走廊空地上可以踩点。</li>
-          <li>Esc 打开菜单。进度记在这台浏览器里。</li>
-        </ul>
-        <h2>原作</h2>
-        <p>制作 Buger404，导演 Wey，主笔 Shaye。人物与插画泺罗，Q 版与地图 Diffileft，音乐 Noveky。程序 Buger404，援助 YcMia。仓库使用 MIT 许可。详见本页的 NOTICE。</p>
-        <p><a href="https://github.com/MorizeroDev/Starvior">MorizeroDev/Starvior</a></p>
-        <button type="button" class="primary" data-action="back-title">返回</button>
-      </article>
     </template>
 
     <template id="tpl-ward">
@@ -153,6 +119,6 @@
     </template>
 
     <noscript>需要启用 JavaScript，才能进入《粟牙》。</noscript>
-    <script type="module" src="js/game.js?v=7"></script>
+    <script type="module" src="js/game.js?v=8"></script>
   </body>
 </html>
